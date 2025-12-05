@@ -1,5 +1,6 @@
 const { buildSchema } = require('graphql');
 
+// Define el esquema GraphQL
 const schema = buildSchema(`
   type User {
     id: Int
@@ -14,14 +15,16 @@ const schema = buildSchema(`
   }
 `);
 
+// Implementa los resolvers para los endpoints definidos
 const root = {
   getGreeting: () => {
     return 'Hello World! (GraphQL is Running)';
   },
   getUser: ({ id }) => {
+    // CORRECCIÓN DE SINTAXIS: Usamos comillas invertidas (backticks) sin caracteres de escape.
     return {
       id: id,
-      name: \`User-\${id}\`,
+      name: `User-${id}`, // <<--- ESTA LÍNEA ES LA CORRECCIÓN
       status: 'Active',
       source: 'GraphQL Mock Data'
     };
@@ -30,5 +33,5 @@ const root = {
 
 module.exports = {
   schema,
-  root 
+  root
 };
